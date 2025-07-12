@@ -79,38 +79,40 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.logging.interceptor)
-
-    //ViewModel
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    //Recycler View
-    implementation(libs.androidx.recyclerview)
-
-    //Glide
-    implementation(libs.glide)
 
     // hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-    implementation(libs.androidx.browser)
+    //Retrofit
+//    implementation(libs.retrofit)
+//    implementation(libs.converter.gson)
+//    implementation(libs.logging.interceptor)
+//
+//    //ViewModel
+//    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+//    implementation(libs.androidx.lifecycle.runtime.ktx)
+//
+//    //Recycler View
+//    implementation(libs.androidx.recyclerview)
+//
+//    //Glide
+//    implementation(libs.glide)
 
-    //Room
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
 
-    //Paging
-    implementation(libs.androidx.paging.compose)
-
-    //WorkManager
-    implementation(libs.androidx.work.runtime.ktx)
-    implementation(libs.androidx.hilt.work)
-    ksp(libs.androidx.hilt.compiler)
+//    implementation(libs.androidx.browser)
+//
+//    //Room
+//    implementation(libs.androidx.room.runtime)
+//    implementation(libs.androidx.room.ktx)
+//    ksp(libs.androidx.room.compiler)
+//
+//    //Paging
+//    implementation(libs.androidx.paging.compose)
+//
+//    //WorkManager
+//    implementation(libs.androidx.work.runtime.ktx)
+//    implementation(libs.androidx.hilt.work)
+//    ksp(libs.androidx.hilt.compiler)
 
 }
