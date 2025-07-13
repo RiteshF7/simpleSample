@@ -13,6 +13,8 @@ import androidx.navigation.navArgument
 import com.trex.simplesample.utils.AppConstants
 import androidx.core.net.toUri
 import com.trex.simplesample.ui.home.HomeScreenRoute
+import com.trex.simplesample.ui.topheadlines.TopHeadlineRoute
+import com.trex.simplesample.ui.topheadlines.TopHeadlineScreen
 
 sealed class Route(val name: String) {
 
@@ -53,6 +55,11 @@ fun SampleNavHost() {
     ) {
         composable(route = Route.HomeScreen.name) {
             HomeScreenRoute(navController)
+        }
+        composable(route = Route.HomeScreen.name) {
+            TopHeadlineRoute(onNewsClick = {
+                openCustomChromeTab(context, it)
+            })
         }
 
         composable(route = Route.NewsList.name,

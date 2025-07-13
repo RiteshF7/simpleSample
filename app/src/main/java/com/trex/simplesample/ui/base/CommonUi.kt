@@ -30,19 +30,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.trex.simplesample.R
+import com.trex.simplesample.domain.models.Article
 
 @Composable
 fun ShowLoading() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight()) {
+            .fillMaxHeight()
+    ) {
         val contentDesc = stringResource(R.string.loading)
-        CircularProgressIndicator(modifier = Modifier
-            .align(Alignment.Center)
-            .semantics {
-                contentDescription = contentDesc
-            })
+        CircularProgressIndicator(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .semantics {
+                    contentDescription = contentDesc
+                })
     }
 }
 
@@ -96,6 +99,33 @@ fun ShowError(text: String, retryClicked: () -> Unit = {}) {
     }
 }
 
+@Composable
+fun ArticleList(articles: List<Article>, onNewsClick: (url: String) -> Unit) {
+    LazyColumn {
+        items(articles.size) { index ->
+            Article(article = articles[index], onNewsClick = onNewsClick)
+        }
+    }
+}
+
+@Composable
+fun Article(article: Article, onNewsClick: (url: String) -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                if (article.url.isNotEmpty()) {
+                    onNewsClick(article.url)
+                }
+            }) {
+        BannerImage(article.url)
+        TitleText(article.title)
+        DescriptionText(article.description)
+        SourceText(article.sourceName)
+    }
+
+}
+
 
 @Composable
 fun BannerImage(imageUrl: String) {
@@ -136,7 +166,7 @@ fun DescriptionText(description: String?) {
 }
 
 @Composable
-fun SourceText(sourceName:String) {
+fun SourceText(sourceName: String) {
     Text(
         text = sourceName,
         style = MaterialTheme.typography.titleSmall,

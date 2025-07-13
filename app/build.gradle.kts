@@ -82,6 +82,8 @@ dependencies {
 
     // Jetpack Compose integration
     implementation(libs.androidx.navigation.compose)
+    implementation (libs.androidx.hilt.navigation.compose)
+    implementation (libs.androidx.lifecycle.runtime.compose)
 
     // hilt
     implementation(libs.hilt.android)
