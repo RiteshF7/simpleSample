@@ -6,6 +6,9 @@ import com.trex.simplesample.di.ApiKey
 import com.trex.simplesample.di.BaseUrl
 import com.trex.simplesample.di.DatabaseName
 import com.trex.simplesample.utils.AppConstants
+import com.trex.simplesample.utils.AppConstants
+import com.trex.simplesample.utils.DefaultDispatcherProvider
+import com.trex.simplesample.utils.DispatcherProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,6 +35,14 @@ class ApplicationModule {
         return AppConstants.DATABASE_NAME
     }
 
+
+    @Provides
+    @javax.inject.Singleton
+    fun provideDispatcher(): DispatcherProvider = DefaultDispatcherProvider()
+
+    @Provides
+    @javax.inject.Singleton
+    fun provideLogger(): Logger = AppLogger()
     @Provides
     @ApiKey
     fun providesApiKey(): String {
