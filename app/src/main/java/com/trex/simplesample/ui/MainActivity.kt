@@ -4,35 +4,45 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.Modifier
-import com.trex.simplesample.di.DatabaseName
+import androidx.compose.ui.graphics.Color
+import com.trex.simplesample.ui.base.SampleNavHost
 import com.trex.simplesample.ui.base.theme.SimpleSampleTheme
+import com.trex.simplesample.ui.base.theme.gray40
+import com.trex.simplesample.utils.AppConstants
 import dagger.hilt.android.AndroidEntryPoint
-import jakarta.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @Inject
-    @DatabaseName
-    lateinit var databaseName: String
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             SimpleSampleTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(topBar = {
+                    TopAppBar(
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            titleContentColor = Color.White
+                        ), title = { Text(text = AppConstants.APP_NAME) })
+                }) { padding ->
                     Column(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding)
+                            .padding(padding)
+                            .background(gray40),
                     ) {
-                        Text("Hello, World!   $databaseName  ")
+                        SampleNavHost()
                     }
                 }
             }

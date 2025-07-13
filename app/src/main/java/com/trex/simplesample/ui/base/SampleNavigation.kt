@@ -12,21 +12,34 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.trex.simplesample.utils.AppConstants
 import androidx.core.net.toUri
+import com.trex.simplesample.ui.home.HomeScreenRoute
 
 sealed class Route(val name: String) {
 
-    data object HomeScreen : Route("homescreen")
+    object HomeScreen : Route("homescreen")
 
-    data object NewsList :
-        Route(name = "newslist?sourceId={sourceId}") {
+    object TopHeadline : Route("topheadline")
+    object PaginationTopHeadline : Route("paginationtopheadline")
+
+    object OfflineTopHeadline : Route("offlinetopheadline")
+    object NewsSources : Route("newssources")
+    object LanguageList : Route("languagelist")
+    object CountryList : Route("countrylist")
+    object Search : Route("search")
+
+    object NewsList :
+        Route(name = "newslist?sourceId={sourceId}&countryId={countryId}&languageId={languageId}") {
         fun passData(
             sourceId: String = "",
+            countryId: String = "",
+            languageId: String = ""
         ): String {
-            return "newslist?sourceId=$sourceId"
+            return "newslist?sourceId=$sourceId&countryId=$countryId&languageId=$languageId"
         }
     }
 
 }
+
 
 @Composable
 fun SampleNavHost() {
@@ -39,24 +52,34 @@ fun SampleNavHost() {
         startDestination = Route.HomeScreen.name
     ) {
         composable(route = Route.HomeScreen.name) {
-//            HomeScreenRoute(navController)
+            HomeScreenRoute(navController)
         }
 
-        composable(
-            route = Route.NewsList.name,
+        composable(route = Route.NewsList.name,
             arguments = listOf(
                 navArgument(AppConstants.SOURCE_ID) {
                     type = NavType.StringType
                     defaultValue = ""
                 },
+                navArgument(AppConstants.COUNTRY_ID) {
+                    type = NavType.StringType
+                    defaultValue = ""
 
+                },
+                navArgument(AppConstants.LANGUAGE_ID) {
+                    type = NavType.StringType
+                    defaultValue = ""
+
+                }
             )
         ) { it ->
             val sourceId = it.arguments?.getString(AppConstants.SOURCE_ID).toString()
+            val countryId = it.arguments?.getString(AppConstants.COUNTRY_ID).toString()
+            val languageId = it.arguments?.getString(AppConstants.LANGUAGE_ID).toString()
 
 //            NewsListRoute(onNewsClick = {
 //                openCustomChromeTab(context, it)
-//            }, sourceId = sourceId)
+//            }, sourceId = sourceId, countryId = countryId, languageId = languageId)
         }
     }
 }
