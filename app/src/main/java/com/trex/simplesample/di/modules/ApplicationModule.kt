@@ -5,7 +5,7 @@ import com.trex.simplesample.data.remote.SampleNetworkService
 import com.trex.simplesample.di.ApiKey
 import com.trex.simplesample.di.BaseUrl
 import com.trex.simplesample.di.DatabaseName
-import com.trex.simplesample.utils.Constants
+import com.trex.simplesample.utils.AppConstants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,19 +23,19 @@ class ApplicationModule {
     @Provides
     @DatabaseName
     fun providesDatabaseName(): String {
-        return Constants.DATABASE_NAME
+        return AppConstants.DATABASE_NAME
     }
 
     @Provides
     @BaseUrl
     fun providesBaseUrl(): String {
-        return Constants.DATABASE_NAME
+        return AppConstants.DATABASE_NAME
     }
 
     @Provides
     @ApiKey
     fun providesApiKey(): String {
-        return Constants.DATABASE_NAME
+        return AppConstants.DATABASE_NAME
     }
 
     @Provides
