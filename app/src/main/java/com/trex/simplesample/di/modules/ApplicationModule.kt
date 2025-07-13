@@ -1,7 +1,7 @@
 package com.trex.simplesample.di.modules
 
 import com.trex.simplesample.data.remote.ApiKeyInterceptor
-import com.trex.simplesample.data.remote.SampleNetworkService
+import com.trex.simplesample.data.remote.NewsNetworkService
 import com.trex.simplesample.di.ApiKey
 import com.trex.simplesample.di.BaseUrl
 import com.trex.simplesample.di.DatabaseName
@@ -61,13 +61,13 @@ class ApplicationModule {
         @BaseUrl baseUrl: String,
         okHttpClient: OkHttpClient,
         converterFactory: GsonConverterFactory
-    ): SampleNetworkService {
+    ): NewsNetworkService {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(baseUrl)
             .addConverterFactory(converterFactory)
             .build()
-            .create(SampleNetworkService::class.java)
+            .create(NewsNetworkService::class.java)
     }
 
 }

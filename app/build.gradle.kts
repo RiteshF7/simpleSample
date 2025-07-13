@@ -96,15 +96,11 @@ dependencies {
     implementation (libs.coil.compose)
 
 
-    //Retrofit
-//    implementation(libs.retrofit)
-//    implementation(libs.converter.gson)
-//    implementation(libs.logging.interceptor)
-//
-//    //ViewModel
-//    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-//    implementation(libs.androidx.lifecycle.runtime.ktx)
-//
+
+    //ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
 //    //Recycler View
 //    implementation(libs.androidx.recyclerview)
 //

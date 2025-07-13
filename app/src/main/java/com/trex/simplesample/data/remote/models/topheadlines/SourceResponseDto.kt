@@ -1,0 +1,8 @@
+package com.trex.simplesample.data.remote.models.topheadlines
+
+import com.google.gson.annotations.SerializedName
+
+data class ApiSource(
+    @SerializedName("id") val id: String? = null,
+    @SerializedName("name") val name: String = "",
+)
