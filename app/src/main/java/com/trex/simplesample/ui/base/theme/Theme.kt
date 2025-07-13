@@ -1,4 +1,4 @@
-package com.trex.simplesample.ui.theme
+package com.trex.simplesample.ui.base.theme
 
 import android.app.Activity
 import android.os.Build

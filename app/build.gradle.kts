@@ -80,9 +80,16 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
+    // Jetpack Compose integration
+    implementation(libs.androidx.navigation.compose)
+
     // hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+
+    //coil
+    implementation (libs.coil.compose)
+
 
     //Retrofit
 //    implementation(libs.retrofit)
@@ -100,7 +107,7 @@ dependencies {
 //    implementation(libs.glide)
 
 
-//    implementation(libs.androidx.browser)
+    implementation(libs.androidx.browser)
 //
 //    //Room
 //    implementation(libs.androidx.room.runtime)

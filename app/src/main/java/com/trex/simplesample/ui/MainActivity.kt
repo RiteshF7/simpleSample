@@ -11,7 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import com.trex.simplesample.di.DatabaseName
-import com.trex.simplesample.ui.theme.SimpleSampleTheme
+import com.trex.simplesample.ui.base.theme.SimpleSampleTheme
 import dagger.hilt.android.AndroidEntryPoint
 import jakarta.inject.Inject
 
