@@ -11,19 +11,18 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.trex.simplesample.utils.AppConstants
+import androidx.core.net.toUri
 
 sealed class Route(val name: String) {
 
-    object HomeScreen : Route("homescreen")
+    data object HomeScreen : Route("homescreen")
 
-    object NewsList :
-        Route(name = "newslist?sourceId={sourceId}&countryId={countryId}&languageId={languageId}") {
+    data object NewsList :
+        Route(name = "newslist?sourceId={sourceId}") {
         fun passData(
             sourceId: String = "",
-            countryId: String = "",
-            languageId: String = ""
         ): String {
-            return "newslist?sourceId=$sourceId&countryId=$countryId&languageId=$languageId"
+            return "newslist?sourceId=$sourceId"
         }
     }
 
@@ -50,25 +49,14 @@ fun SampleNavHost() {
                     type = NavType.StringType
                     defaultValue = ""
                 },
-                navArgument(AppConstants.COUNTRY_ID) {
-                    type = NavType.StringType
-                    defaultValue = ""
 
-                },
-                navArgument(AppConstants.LANGUAGE_ID) {
-                    type = NavType.StringType
-                    defaultValue = ""
-
-                }
             )
         ) { it ->
             val sourceId = it.arguments?.getString(AppConstants.SOURCE_ID).toString()
-            val countryId = it.arguments?.getString(AppConstants.COUNTRY_ID).toString()
-            val languageId = it.arguments?.getString(AppConstants.LANGUAGE_ID).toString()
-//
+
 //            NewsListRoute(onNewsClick = {
 //                openCustomChromeTab(context, it)
-//            }, sourceId = sourceId, countryId = countryId, languageId = languageId)
+//            }, sourceId = sourceId)
         }
     }
 }
@@ -76,5 +64,5 @@ fun SampleNavHost() {
 fun openCustomChromeTab(context: Context, url: String) {
     val builder = CustomTabsIntent.Builder()
     val customTabsIntent = builder.build()
-    customTabsIntent.launchUrl(context, Uri.parse(url))
+    customTabsIntent.launchUrl(context, url.toUri())
 }
