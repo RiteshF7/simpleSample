@@ -6,12 +6,16 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.hilt.plugin)
-//    alias(libs.plugins.room)
+    alias(libs.plugins.room)
 }
 
+
 android {
+
+
     namespace = "com.trex.simplesample"
     compileSdk = 36
+
 
     defaultConfig {
         applicationId = "com.trex.simplesample"
@@ -33,21 +37,28 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlin {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
 
 
 
     buildFeatures {
         compose = true
     }
+
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
+
 }
 
 dependencies {
@@ -79,16 +90,24 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-
     // hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-    //Retrofit
+
+    //Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+
+//    //Retrofit
 //    implementation(libs.retrofit)
 //    implementation(libs.converter.gson)
 //    implementation(libs.logging.interceptor)
-//
+
+//     implementation(libs.androidx.browser)
+
 //    //ViewModel
 //    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 //    implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -98,14 +117,6 @@ dependencies {
 //
 //    //Glide
 //    implementation(libs.glide)
-
-
-//    implementation(libs.androidx.browser)
-//
-//    //Room
-//    implementation(libs.androidx.room.runtime)
-//    implementation(libs.androidx.room.ktx)
-//    ksp(libs.androidx.room.compiler)
 //
 //    //Paging
 //    implementation(libs.androidx.paging.compose)
