@@ -29,13 +29,13 @@ class ApplicationModule {
     @Provides
     @BaseUrl
     fun providesBaseUrl(): String {
-        return Constants.DATABASE_NAME
+        return AppConstants.DATABASE_NAME
     }
 
     @Provides
     @ApiKey
     fun providesApiKey(): String {
-        return Constants.DATABASE_NAME
+        return AppConstants.DATABASE_NAME
     }
 
     @Provides

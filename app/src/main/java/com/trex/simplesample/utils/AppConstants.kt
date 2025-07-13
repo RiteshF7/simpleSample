@@ -6,5 +6,6 @@ object AppConstants {
     const val SOURCE_ID = "sourceId"
     const val COUNTRY_ID = "countryId"
     const val LANGUAGE_ID = "languageId"
-
+    const val BASE_URL = "https://newsapi.org/v2/"
+    const val API_KEY = "d25d4ab024364b73bbea0d394e583519"
 }
