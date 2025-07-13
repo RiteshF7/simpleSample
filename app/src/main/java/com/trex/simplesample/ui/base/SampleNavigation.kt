@@ -1,20 +1,18 @@
 package com.trex.simplesample.ui.base
 
 import android.content.Context
-import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.net.toUri
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.trex.simplesample.utils.AppConstants
-import androidx.core.net.toUri
 import com.trex.simplesample.ui.home.HomeScreenRoute
 import com.trex.simplesample.ui.topheadlines.TopHeadlineRoute
-import com.trex.simplesample.ui.topheadlines.TopHeadlineScreen
+import com.trex.simplesample.utils.AppConstants
 
 sealed class Route(val name: String) {
 
@@ -56,13 +54,14 @@ fun SampleNavHost() {
         composable(route = Route.HomeScreen.name) {
             HomeScreenRoute(navController)
         }
-        composable(route = Route.HomeScreen.name) {
+        composable(route = Route.TopHeadline.name) {
             TopHeadlineRoute(onNewsClick = {
                 openCustomChromeTab(context, it)
             })
         }
 
-        composable(route = Route.NewsList.name,
+        composable(
+            route = Route.NewsList.name,
             arguments = listOf(
                 navArgument(AppConstants.SOURCE_ID) {
                     type = NavType.StringType
