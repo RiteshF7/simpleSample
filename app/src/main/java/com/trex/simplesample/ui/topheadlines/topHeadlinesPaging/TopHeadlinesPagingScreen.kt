@@ -1,9 +1,12 @@
 package com.trex.simplesample.ui.topheadlines.topHeadlinesPaging
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,39 +32,50 @@ fun PaginationTopHeadlineRoute(
 
 @Composable
 fun TopHeadlineScreen(articles: LazyPagingItems<Article>, onNewsClick: (url: String) -> Unit) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        ArticleList(articles, onNewsClick)
 
-    ArticleList(articles, onNewsClick)
-
-    articles.apply {
         when {
-            loadState.refresh is LoadState.Loading -> {
+            articles.loadState.refresh is LoadState.Loading -> {
                 ShowLoading()
             }
 
-            loadState.refresh is LoadState.Error -> {
+            articles.loadState.refresh is LoadState.Error -> {
                 val error = articles.loadState.refresh as LoadState.Error
-                ShowError(error.error.localizedMessage!!)
+                ShowError(error.error.localizedMessage ?: "Unknown error")
+            }
+        }
+
+        when {
+            articles.loadState.append is LoadState.Loading -> {
+                Box(
+                    modifier = Modifier.align(Alignment.BottomCenter)
+                ) {
+                    ShowLoading()
+                }
             }
 
-            loadState.append is LoadState.Loading -> {
-                ShowLoading()
-            }
-
-            loadState.append is LoadState.Error -> {
+            articles.loadState.append is LoadState.Error -> {
                 val error = articles.loadState.append as LoadState.Error
-                ShowError(error.error.localizedMessage!!)
+                Box(
+                    modifier = Modifier.align(Alignment.BottomCenter)
+                ) {
+                    ShowError(error.error.localizedMessage ?: "Unknown error")
+                }
             }
         }
     }
-
 }
 
 @Composable
 fun ArticleList(articles: LazyPagingItems<Article>, onNewsClick: (url: String) -> Unit) {
     LazyColumn {
-        items(articles.itemCount, key = { index -> articles[index]?.url ?: index }) { index ->
-            articles[index]?.let {
-                Article(it, onNewsClick)
+        items(
+            count = articles.itemCount,
+            key = { index -> articles.peek(index)?.url ?: index }
+        ) { index ->
+            articles[index]?.let { article ->
+                Article(article, onNewsClick)
             }
         }
     }

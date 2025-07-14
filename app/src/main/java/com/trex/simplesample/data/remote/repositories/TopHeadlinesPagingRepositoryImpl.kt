@@ -11,21 +11,21 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
+
 class TopHeadlinesPagingRepositoryImpl @Inject constructor(
     private val topHeadlinesPagingSourceFactory: TopHeadlinesPagingSourceFactory
 ) : TopHeadlinesPagingRepository {
 
-    private val pagerFlow: Flow<PagingData<Article>> by lazy {
-        Pager(
+    override fun getTopHeadlines(): Flow<PagingData<Article>> {
+        return Pager(
             config = PagingConfig(
                 pageSize = AppConstants.PAGE_SIZE,
                 initialLoadSize = AppConstants.PAGE_SIZE,
-                prefetchDistance = 2,
-                enablePlaceholders = false
+                prefetchDistance = 3,
+                enablePlaceholders = false,
+                maxSize = PagingConfig.MAX_SIZE_UNBOUNDED,
             ),
             pagingSourceFactory = { topHeadlinesPagingSourceFactory.create() }
         ).flow
     }
-
-    override fun getTopHeadlines(): Flow<PagingData<Article>> = pagerFlow
 }

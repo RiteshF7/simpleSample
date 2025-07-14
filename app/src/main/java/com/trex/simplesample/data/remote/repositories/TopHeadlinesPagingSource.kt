@@ -1,6 +1,5 @@
 package com.trex.simplesample.data.remote.repositories
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.trex.simplesample.data.remote.NewsNetworkService
@@ -15,8 +14,7 @@ import jakarta.inject.Inject
 class TopHeadlinesPagingSource @Inject constructor(
     private val networkService: NewsNetworkService,
     @DefaultCountryName private val country: String
-) :
-    PagingSource<Int, Article>() {
+) : PagingSource<Int, Article>() {
 
     init {
         println("PagingSource Created: TopHeadlinesPagingSource")
@@ -25,29 +23,43 @@ class TopHeadlinesPagingSource @Inject constructor(
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         println("getRefreshKey called. Anchor = ${state.anchorPosition}")
 
-        val anchorPosition = state.anchorPosition ?: return null
-        val page = state.closestPageToPosition(anchorPosition)
-        return page?.prevKey?.plus(1) ?: page?.nextKey?.minus(1)
+        return state.anchorPosition?.let { anchorPosition ->
+            val page = state.closestPageToPosition(anchorPosition)
+            page?.prevKey?.plus(1) ?: page?.nextKey?.minus(1)
+        }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
-        println("PagingSource load called for page: ${params.key ?: AppConstants.INITIAL_PAGE}")
-
         val page = params.key ?: AppConstants.INITIAL_PAGE
-        return runCatching {
+        println("🔄 PagingSource load called - Page: $page, LoadSize: ${params.loadSize}, LoadType: ${params::class.simpleName}")
+
+        return try {
             val response = networkService.getTopHeadlines(
                 country = country,
                 page = page,
-                pageSize = AppConstants.PAGE_SIZE
+                pageSize = AppConstants.PAGE_SIZE // Use fixed PAGE_SIZE for consistency
             )
             val articleList = response.apiArticles.apiArticleListToDomain(country)
 
+            println("📊 API Response - Page: $page, Articles received: ${articleList.size}, Total: ${response.totalResults}")
+
+            // Simplified end condition - only check if articles are empty or less than expected
+            val isEndOfPaginationReached = articleList.isEmpty() || articleList.size < AppConstants.PAGE_SIZE
+
+            val nextKey = if (isEndOfPaginationReached) null else page + 1
+            val prevKey = if (page == AppConstants.INITIAL_PAGE) null else page - 1
+
+            println("🔑 Keys - PrevKey: $prevKey, NextKey: $nextKey, EndReached: $isEndOfPaginationReached")
+
             LoadResult.Page(
                 data = articleList,
-                prevKey = if (page == AppConstants.INITIAL_PAGE) null else page - 1,
-                nextKey = if (articleList.isEmpty()) null else page + 1
+                prevKey = prevKey,
+                nextKey = nextKey
             )
-        }.getOrElse { throwable -> LoadResult.Error(throwable) }
+        } catch (exception: Exception) {
+            println("❌ PagingSource error: ${exception.message}")
+            exception.printStackTrace()
+            LoadResult.Error(exception)
+        }
     }
-
 }

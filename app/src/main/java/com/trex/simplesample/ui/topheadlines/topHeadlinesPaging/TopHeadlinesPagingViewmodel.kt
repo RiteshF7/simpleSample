@@ -8,6 +8,7 @@ import com.trex.simplesample.domain.models.Article
 import com.trex.simplesample.domain.repositories.TopHeadlinesPagingRepository
 import com.trex.simplesample.utils.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -22,26 +23,12 @@ class TopHeadlinesPagingViewmodel @Inject constructor(
     private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
-    private val _topHeadlineUiState =
-        MutableStateFlow<PagingData<Article>>(value = PagingData.empty())
-
-    val topHeadlineUiState: StateFlow<PagingData<Article>> = _topHeadlineUiState
+    val topHeadlineUiState: Flow<PagingData<Article>> =
+        paginationTopHeadlineRepository.getTopHeadlines()
+            .flowOn(dispatcherProvider.io)
+            .cachedIn(viewModelScope)
 
     init {
-        startFetchingArticles()
+        println("📱 ViewModel initialized")
     }
-
-    private fun startFetchingArticles() {
-        viewModelScope.launch(dispatcherProvider.main) {
-            paginationTopHeadlineRepository.getTopHeadlines()
-                .flowOn(dispatcherProvider.io)
-                .catch { e -> }
-                .cachedIn(viewModelScope)
-                .collect {
-                    _topHeadlineUiState.value = it
-                }
-
-        }
-    }
-
 }
