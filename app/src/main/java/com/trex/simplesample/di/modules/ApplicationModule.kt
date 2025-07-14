@@ -5,6 +5,9 @@ import com.trex.simplesample.data.remote.ApiKeyInterceptor
 import com.trex.simplesample.data.remote.NewsNetworkService
 import com.trex.simplesample.di.ApiKey
 import com.trex.simplesample.di.BaseUrl
+import android.content.Context
+import androidx.room.Room
+import com.trex.simplesample.data.local.SampleDatabase
 import com.trex.simplesample.di.DatabaseName
 import com.trex.simplesample.utils.AppConstants
 import com.trex.simplesample.utils.DefaultDispatcherProvider
@@ -34,5 +37,17 @@ class ApplicationModule {
         return AppConstants.DATABASE_NAME
     }
 
+
+    @Provides
+    @DatabaseName
+    fun providesDatabase(
+        @ApplicationContext context: Context,
+        @DatabaseName databaseName: String
+    ): SampleDatabase {
+        return Room
+            .databaseBuilder(context, SampleDatabase::class.java, databaseName)
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 
 }
