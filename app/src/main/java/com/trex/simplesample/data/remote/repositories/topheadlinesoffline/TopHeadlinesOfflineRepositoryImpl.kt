@@ -3,16 +3,14 @@ package com.trex.simplesample.data.remote.repositories.topheadlinesoffline
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.trex.simplesample.domain.models.Article
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import androidx.paging.map
 import com.trex.simplesample.data.local.NewsDatabaseService
+import com.trex.simplesample.domain.models.Article
+import com.trex.simplesample.domain.repositories.TopHeadlinesOfflineRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-interface TopHeadlinesOfflineRepository {
-    fun getTopHeadlinesOfflinePaging(): Flow<PagingData<Article>>
-}
 
 class TopHeadlinesOfflineRepositoryImpl @Inject constructor(
     private val databaseService: NewsDatabaseService
