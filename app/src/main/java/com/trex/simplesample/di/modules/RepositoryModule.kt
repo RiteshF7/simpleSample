@@ -2,6 +2,8 @@ package com.trex.simplesample.di.modules
 
 import com.trex.simplesample.data.remote.NewsNetworkService
 import com.trex.simplesample.data.remote.repositories.TopHeadlinesRepositoryImpl
+import com.trex.simplesample.data.repositories.TopHeadlinesOfflineRepository
+import com.trex.simplesample.data.repositories.TopHeadlinesOfflineRepositoryImpl
 import com.trex.simplesample.domain.repositories.TopHeadlinesRepository
 import dagger.Binds
 import dagger.Module

@@ -121,6 +121,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 
 
+
 //    //Retrofit
 //    implementation(libs.retrofit)
 //    implementation(libs.converter.gson)
@@ -140,15 +141,12 @@ dependencies {
 
 
     implementation(libs.androidx.browser)
-//
-//    //Room
-//    implementation(libs.androidx.room.runtime)
-//    implementation(libs.androidx.room.ktx)
-//    ksp(libs.androidx.room.compiler)
-//
-//    //Paging
-//    implementation(libs.androidx.paging.compose)
-//
+
+  //Paging
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.paging.runtime)
+    testImplementation(libs.androidx.paging.common)
+
 //    //WorkManager
 //    implementation(libs.androidx.work.runtime.ktx)
 //    implementation(libs.androidx.hilt.work)
