@@ -1,6 +1,8 @@
 package com.trex.simplesample.utils
 
 object AppConstants {
+    const val INITIAL_PAGE: Int = 1
+    const val PAGE_SIZE: Int = 10
     const val APP_NAME = "SimpleSample"
     const val DATABASE_NAME = "SIMPLE_SAMPLE_DB"
     const val SOURCE_ID = "sourceId"

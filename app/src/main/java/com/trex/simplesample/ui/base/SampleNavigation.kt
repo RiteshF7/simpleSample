@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.trex.simplesample.ui.home.HomeScreenRoute
 import com.trex.simplesample.ui.topheadlines.TopHeadlineRoute
+import com.trex.simplesample.ui.topheadlines.topHeadlinesPaging.PaginationTopHeadlineRoute
 import com.trex.simplesample.utils.AppConstants
 
 sealed class Route(val name: String) {
@@ -56,6 +57,12 @@ fun SampleNavHost() {
         }
         composable(route = Route.TopHeadline.name) {
             TopHeadlineRoute(onNewsClick = {
+                openCustomChromeTab(context, it)
+            })
+        }
+
+        composable(route = Route.PaginationTopHeadline.name) {
+            PaginationTopHeadlineRoute(onNewsClick = {
                 openCustomChromeTab(context, it)
             })
         }

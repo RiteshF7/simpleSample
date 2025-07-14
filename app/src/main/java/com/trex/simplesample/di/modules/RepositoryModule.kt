@@ -1,7 +1,8 @@
 package com.trex.simplesample.di.modules
 
-import com.trex.simplesample.data.remote.NewsNetworkService
+import com.trex.simplesample.data.remote.repositories.TopHeadlinesPagingRepositoryImpl
 import com.trex.simplesample.data.remote.repositories.TopHeadlinesRepositoryImpl
+import com.trex.simplesample.domain.repositories.TopHeadlinesPagingRepository
 import com.trex.simplesample.domain.repositories.TopHeadlinesRepository
 import dagger.Binds
 import dagger.Module
@@ -18,4 +19,10 @@ abstract class RepositoryModule {
     abstract fun bindTopHeadlinesRepository(
         impl: TopHeadlinesRepositoryImpl
     ): TopHeadlinesRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindTopHeadlinesPagingRepository(
+        impl: TopHeadlinesPagingRepositoryImpl
+    ): TopHeadlinesPagingRepository
 }

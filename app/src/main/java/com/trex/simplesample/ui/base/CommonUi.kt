@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,7 +16,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -130,20 +128,20 @@ fun Article(article: Article, onNewsClick: (url: String) -> Unit) {
                     onNewsClick(article.url)
                 }
             }) {
-      NewsCard(
-          imageUrl =    article.imageUrl,
-          title = article.title,
-          description = article.description,
-          sourceName = article.sourceName,
-          modifier = Modifier.fillMaxWidth()
-      )
+        NewsCard(
+            imageUrl = article.imageUrl,
+            title = article.title,
+            description = article.description,
+            sourceName = article.sourceName,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 
 }
 
 @Composable
 fun NewsCard(
-    imageUrl: String,
+    imageUrl: String?,
     title: String,
     description: String?,
     sourceName: String,
