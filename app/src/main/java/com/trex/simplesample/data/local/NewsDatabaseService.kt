@@ -1,6 +1,7 @@
 package com.trex.simplesample.data.local
 
 import androidx.paging.PagingSource
+import androidx.room.withTransaction
 import com.trex.simplesample.data.local.entity.ArticleEntity
 import com.trex.simplesample.data.local.entity.NewsSourcesEntity
 import com.trex.simplesample.data.local.entity.RemoteKeyEntity
@@ -36,9 +37,13 @@ class NewsDatabaseService @Inject constructor(private val simpleDatabase: NewsDa
         return simpleDatabase.remoteKeyDao().remoteKeyById(id)
     }
 
-    override suspend fun clearAllCaches() {
+    override suspend fun clearAllCaches(remoteKey: String) {
         simpleDatabase.topHeadlinesDao().clearTopHeadlinesArticles(AppConstants.COUNTRY)
         simpleDatabase.sourceDao().clearSourcesNews()
-        simpleDatabase.remoteKeyDao().clearRemoteKeys()
+        simpleDatabase.remoteKeyDao().clearRemoteKey(remoteKey)
+    }
+
+    suspend fun withTransaction(block: suspend () -> Unit) = simpleDatabase.withTransaction {
+        block()
     }
 }

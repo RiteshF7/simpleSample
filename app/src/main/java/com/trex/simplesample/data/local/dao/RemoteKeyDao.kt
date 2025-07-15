@@ -18,6 +18,10 @@ interface RemoteKeyDao {
     @Query("DELETE FROM remote_keys")
     suspend fun clearRemoteKeys()
 
+    @Query("DELETE FROM remote_keys WHERE id = :id")
+    suspend fun clearRemoteKey(id: String)
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertKey(remoteKey: RemoteKeyEntity)
 }

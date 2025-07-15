@@ -1,6 +1,7 @@
 package com.trex.simplesample.data.remote.models.topheadlines
 
 import com.google.gson.annotations.SerializedName
+import com.trex.simplesample.data.local.entity.ArticleEntity
 import com.trex.simplesample.domain.models.Article
 
 data class ApiArticle(
@@ -20,14 +21,23 @@ fun List<ApiArticle>.apiArticleListToDomain(country: String): List<Article> {
 }
 
 
-fun ApiArticle.toDomain(country:String): Article {
-    return Article(
+fun ApiArticle.toDomain(country: String): Article = Article(
+    title = this.title,
+    description = this.description,
+    url = this.url,
+    imageUrl = this.imageUrl,
+    sourceName = this.apiSource.name,
+    country = country
+)
+
+fun ApiArticle.toEntity(country: String): ArticleEntity =
+    ArticleEntity(
         title = this.title,
         description = this.description,
         url = this.url,
         imageUrl = this.imageUrl,
-        sourceName = this.apiSource.name,
-        country =country
+        country = country,
+        source = this.apiSource.toEntity()
     )
-}
+
 

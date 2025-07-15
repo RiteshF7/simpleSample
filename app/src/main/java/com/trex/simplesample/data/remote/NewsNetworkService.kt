@@ -1,6 +1,6 @@
 package com.trex.simplesample.data.remote
 
-import com.nitinlondhe.newsapp.data.model.topheadlines.TopHeadlinesDto
+import com.trex.simplesample.data.remote.models.topheadlines.TopHeadlinesDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

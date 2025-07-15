@@ -1,6 +1,7 @@
 package com.trex.simplesample.domain.repositories
 
 import androidx.paging.PagingData
+import com.trex.simplesample.data.local.entity.ArticleEntity
 import com.trex.simplesample.domain.models.Article
 import kotlinx.coroutines.flow.Flow
 

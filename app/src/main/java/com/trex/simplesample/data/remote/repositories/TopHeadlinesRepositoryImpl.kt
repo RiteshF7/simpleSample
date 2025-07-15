@@ -4,7 +4,6 @@ import com.trex.simplesample.data.remote.NewsNetworkService
 import com.trex.simplesample.data.remote.models.topheadlines.apiArticleListToDomain
 import com.trex.simplesample.domain.models.Article
 import com.trex.simplesample.domain.repositories.TopHeadlinesRepository
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -17,7 +16,8 @@ class TopHeadlinesRepositoryImpl @Inject constructor(private val networkService:
         return flow {
             emit(networkService.getTopHeadlines(countryId))
         }.map {
-            it.apiArticles.apiArticleListToDomain(countryId)
+            val articlesList = it.apiArticles
+            articlesList?.apiArticleListToDomain(countryId) ?: emptyList()
         }
 
     }

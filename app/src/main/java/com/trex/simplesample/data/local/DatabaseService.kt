@@ -21,6 +21,8 @@ interface DatabaseService {
 
     suspend fun getRemoteKey(id: String): RemoteKeyEntity?
 
-    suspend fun clearAllCaches()
+    suspend fun clearAllCaches(remoteKey: String)
+
+
 
 }
