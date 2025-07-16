@@ -1,7 +1,6 @@
 package com.trex.simplesample.data.remote.models.topheadlines
 
 import com.google.gson.annotations.SerializedName
-import com.nitinlondhe.newsapp.data.local.entity.SourceEntity
 import com.trex.simplesample.domain.models.Source
 
 data class ApiSource(
@@ -16,7 +15,3 @@ fun ApiSource.toSource(): Source {
     )
 }
 
-fun ApiSource.toEntity(): SourceEntity = SourceEntity(
-    id = this.id,
-    name = this.name
-)
