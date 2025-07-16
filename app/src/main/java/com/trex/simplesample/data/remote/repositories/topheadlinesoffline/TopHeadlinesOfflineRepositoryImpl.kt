@@ -1,5 +1,6 @@
 package com.trex.simplesample.data.remote.repositories.topheadlinesoffline
 
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -10,6 +11,7 @@ import com.trex.simplesample.data.local.entity.toDomain
 import com.trex.simplesample.data.remote.NewsNetworkService
 import com.trex.simplesample.domain.models.Article
 import com.trex.simplesample.domain.repositories.TopHeadlinesOfflineRepository
+import com.trex.simplesample.utils.AppConstants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -24,8 +26,9 @@ class TopHeadlinesOfflineRepositoryImpl @Inject constructor(
         return Pager(
             remoteMediator = TopHeadlinesRemoteMediator(networkService, databaseService),
             config = PagingConfig(
-                prefetchDistance = 1,
-                pageSize = 10,
+                prefetchDistance = 2,
+                pageSize = AppConstants.PAGE_SIZE,
+                initialLoadSize = PAGE_SIZE,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {

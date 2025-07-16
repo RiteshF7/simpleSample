@@ -34,12 +34,9 @@ class TopHeadlinesRemoteMediator @Inject constructor(
             }
 
             LoadType.PREPEND -> {
-                val remoteKey = databaseService.getRemoteKey(feedKey)
-                val prevKey = remoteKey?.prevKey
-                if (prevKey == null || prevKey <= 0) {
-                    return MediatorResult.Success(endOfPaginationReached = true)
-                }
-                prevKey
+                return MediatorResult.Success(
+                    endOfPaginationReached = true
+                )
             }
 
             LoadType.APPEND -> {
