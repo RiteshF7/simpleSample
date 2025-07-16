@@ -60,6 +60,11 @@ fun SampleNavHost() {
                 openCustomChromeTab(context, it)
             })
         }
+        composable(route = Route.TopHeadline.name) {
+            TopHeadlineRoute(onNewsClick = {
+                openCustomChromeTab(context, it)
+            })
+        }
 
         composable(
             route = Route.NewsList.name,
