@@ -39,12 +39,12 @@ class TopHeadlinesPagingSource @Inject constructor(
                 page = page,
                 pageSize = AppConstants.PAGE_SIZE // Use fixed PAGE_SIZE for consistency
             )
-            val articleList = response.apiArticles.apiArticleListToDomain(country)
+            val articleList = response.apiArticles?.apiArticleListToDomain(country) ?: emptyList()
 
             println("📊 API Response - Page: $page, Articles received: ${articleList.size}, Total: ${response.totalResults}")
 
-            // Simplified end condition - only check if articles are empty or less than expected
-            val isEndOfPaginationReached = articleList.isEmpty() || articleList.size < AppConstants.PAGE_SIZE
+            val isEndOfPaginationReached =
+                articleList.isEmpty() || articleList.size < AppConstants.PAGE_SIZE
 
             val nextKey = if (isEndOfPaginationReached) null else page + 1
             val prevKey = if (page == AppConstants.INITIAL_PAGE) null else page - 1

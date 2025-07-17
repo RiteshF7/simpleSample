@@ -1,6 +1,7 @@
 package com.trex.simplesample.ui.base
 
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -59,7 +61,7 @@ fun DescriptionText(description: String?) {
 
 @Composable
 fun ImageViewFromUrl(
-    imageUrl: String,
+    imageUrl: String?,
     modifier: Modifier = Modifier,
 ) {
 
@@ -141,78 +143,7 @@ fun ShowError(text: String, retryClicked: () -> Unit = {}) {
     }
 }
 
-@Composable
-fun ArticleList(articles: List<Article>, onNewsClick: (url: String) -> Unit) {
-    LazyColumn {
-        items(articles.size) { index ->
-            Article(article = articles[index], onNewsClick = onNewsClick)
-        }
-    }
-}
 
-@Composable
-fun Article(article: Article, onNewsClick: (url: String) -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                if (article.url.isNotEmpty()) {
-                    onNewsClick(article.url)
-                }
-            }) {
-        NewsCard(
-            imageUrl = article.imageUrl,
-            title = article.title,
-            description = article.description,
-            sourceName = article.sourceName,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-
-}
-
-@Composable
-fun NewsCard(
-    imageUrl: String?,
-    title: String,
-    description: String?,
-    sourceName: String,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(12.dp),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        )
-    ) {
-        Column {
-            AsyncImage(
-                model = imageUrl,
-                contentDescription = stringResource(R.string.banner_image),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-            )
-
-            Column(
-                modifier = Modifier.padding(16.dp)
-            ) {
-                if (title.isNotEmpty()) {
-                    Text(
-                        text = title,
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                }
 @Composable
 fun NewsList(articles: List<Article>, onNewsClick: (url: String) -> Unit) {
     ArticleList(articles = articles, onNewsClick = onNewsClick)

@@ -14,9 +14,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.trex.simplesample.domain.models.Article
-import com.trex.simplesample.ui.base.Article
 import com.trex.simplesample.ui.base.ShowError
 import com.trex.simplesample.ui.base.ShowLoading
+import com.trex.simplesample.ui.topheadlines.ArticleItem
 
 @Composable
 fun PaginationTopHeadlineRoute(
@@ -75,7 +75,7 @@ fun ArticleList(articles: LazyPagingItems<Article>, onNewsClick: (url: String) -
             key = { index -> articles.peek(index)?.url ?: index }
         ) { index ->
             articles[index]?.let { article ->
-                Article(article, onNewsClick)
+                ArticleItem(article, onNewsClick)
             }
         }
     }
