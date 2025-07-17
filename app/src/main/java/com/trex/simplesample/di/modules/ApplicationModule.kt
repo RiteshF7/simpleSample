@@ -6,9 +6,10 @@ import com.trex.simplesample.di.ApiKey
 import com.trex.simplesample.di.BaseUrl
 import com.trex.simplesample.di.DatabaseName
 import com.trex.simplesample.utils.AppConstants
-import com.trex.simplesample.utils.AppConstants
 import com.trex.simplesample.utils.DefaultDispatcherProvider
 import com.trex.simplesample.utils.DispatcherProvider
+import com.trex.simplesample.utils.logger.AppLogger
+import com.trex.simplesample.utils.logger.Logger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +27,6 @@ class ApplicationModule {
     @Provides
     @DatabaseName
     fun providesDatabaseName(): String {
-        return AppConstants.DATABASE_NAME
         return AppConstants.DATABASE_NAME
     }
 
