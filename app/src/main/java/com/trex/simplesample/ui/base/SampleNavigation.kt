@@ -1,32 +1,45 @@
 package com.trex.simplesample.ui.base
 
 import android.content.Context
-import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.net.toUri
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.trex.simplesample.ui.home.HomeScreenRoute
+import com.trex.simplesample.ui.topheadlines.TopHeadlineRoute
 import com.trex.simplesample.utils.AppConstants
-import androidx.core.net.toUri
 
 sealed class Route(val name: String) {
 
-    data object HomeScreen : Route("homescreen")
+    object HomeScreen : Route("homescreen")
 
-    data object NewsList :
-        Route(name = "newslist?sourceId={sourceId}") {
+    object TopHeadline : Route("topheadline")
+    object PaginationTopHeadline : Route("paginationtopheadline")
+
+    object OfflineTopHeadline : Route("offlinetopheadline")
+    object NewsSources : Route("newssources")
+    object LanguageList : Route("languagelist")
+    object CountryList : Route("countrylist")
+    object Search : Route("search")
+
+    object NewsList :
+        Route(name = "newslist?sourceId={sourceId}&countryId={countryId}&languageId={languageId}") {
         fun passData(
             sourceId: String = "",
+            countryId: String = "",
+            languageId: String = ""
         ): String {
-            return "newslist?sourceId=$sourceId"
+            return "newslist?sourceId=$sourceId&countryId=$countryId&languageId=$languageId"
         }
     }
 
 }
+
 
 @Composable
 fun SampleNavHost() {
@@ -39,7 +52,13 @@ fun SampleNavHost() {
         startDestination = Route.HomeScreen.name
     ) {
         composable(route = Route.HomeScreen.name) {
-//            HomeScreenRoute(navController)
+            HomeScreenRoute(navController)
+        }
+
+        composable(route = Route.TopHeadline.name) {
+            TopHeadlineRoute(onNewsClick = {
+                openCustomChromeTab(context, it)
+            })
         }
 
         composable(
@@ -49,14 +68,25 @@ fun SampleNavHost() {
                     type = NavType.StringType
                     defaultValue = ""
                 },
+                navArgument(AppConstants.COUNTRY_ID) {
+                    type = NavType.StringType
+                    defaultValue = ""
 
+                },
+                navArgument(AppConstants.LANGUAGE_ID) {
+                    type = NavType.StringType
+                    defaultValue = ""
+
+                }
             )
         ) { it ->
             val sourceId = it.arguments?.getString(AppConstants.SOURCE_ID).toString()
+            val countryId = it.arguments?.getString(AppConstants.COUNTRY_ID).toString()
+            val languageId = it.arguments?.getString(AppConstants.LANGUAGE_ID).toString()
 
 //            NewsListRoute(onNewsClick = {
 //                openCustomChromeTab(context, it)
-//            }, sourceId = sourceId)
+//            }, sourceId = sourceId, countryId = countryId, languageId = languageId)
         }
     }
 }
