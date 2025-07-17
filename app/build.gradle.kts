@@ -93,8 +93,8 @@ dependencies {
 
     // Jetpack Compose integration
     implementation(libs.androidx.navigation.compose)
-    implementation (libs.androidx.hilt.navigation.compose)
-    implementation (libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
 
     // Jetpack Compose integration
     implementation(libs.androidx.navigation.compose)
@@ -109,8 +109,7 @@ dependencies {
     implementation(libs.logging.interceptor)
 
     //coil
-    implementation (libs.coil.compose)
-
+    implementation(libs.coil.compose)
 
 
     //ViewModel
@@ -160,6 +159,11 @@ dependencies {
 //    implementation(libs.androidx.room.ktx)
 //    ksp(libs.androidx.room.compiler)
 //
+    //Paging
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.paging.runtime)
+    testImplementation(libs.androidx.paging.common)
+
 //    //Paging
 //    implementation(libs.androidx.paging.compose)
 //

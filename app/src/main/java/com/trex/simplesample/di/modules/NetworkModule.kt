@@ -3,8 +3,10 @@ package com.trex.simplesample.di.modules
 import android.content.Context
 import com.trex.simplesample.data.remote.ApiKeyInterceptor
 import com.trex.simplesample.data.remote.NewsNetworkService
+import com.trex.simplesample.data.remote.repositories.TopHeadlinesPagingSource
 import com.trex.simplesample.di.ApiKey
 import com.trex.simplesample.di.BaseUrl
+import com.trex.simplesample.di.DefaultCountryName
 import com.trex.simplesample.utils.AppConstants
 import com.trex.simplesample.utils.DefaultDispatcherProvider
 import com.trex.simplesample.utils.DispatcherProvider
@@ -84,5 +86,21 @@ class NetworkModule {
             .addConverterFactory(converterFactory)
             .build()
             .create(NewsNetworkService::class.java)
+    }
+
+    @Provides
+    @DefaultCountryName
+    fun providesDefaultCountryName(): String {
+        return AppConstants.COUNTRY
+    }
+
+
+    @Provides
+    @Singleton
+    fun providesTopHeadlinePagingSource(
+        networkService: NewsNetworkService,
+        @DefaultCountryName countryName: String
+    ): TopHeadlinesPagingSource {
+        return TopHeadlinesPagingSource(networkService, countryName)
     }
 }

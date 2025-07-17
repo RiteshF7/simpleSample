@@ -2,10 +2,10 @@ package com.trex.simplesample.ui.topheadlines
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.trex.simplesample.di.DefaultCountryName
 import com.trex.simplesample.domain.models.Article
 import com.trex.simplesample.domain.usecase.GetTopHeadlinesUseCase
 import com.trex.simplesample.ui.base.UiState
-import com.trex.simplesample.utils.AppConstants
 import com.trex.simplesample.utils.DispatcherProvider
 import com.trex.simplesample.utils.NetworkHelper
 import com.trex.simplesample.utils.logger.Logger
@@ -21,7 +21,8 @@ class TopHeadlineViewModel @Inject constructor(
     private val getTopHeadlinesUseCase: GetTopHeadlinesUseCase,
     private val dispatcherProvider: DispatcherProvider,
     private val networkHelper: NetworkHelper,
-    private val logger: Logger
+    private val logger: Logger,
+    @DefaultCountryName private val countryName: String
 ) : ViewModel() {
 
     private val _topHeadlineUiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
@@ -41,7 +42,7 @@ class TopHeadlineViewModel @Inject constructor(
 
     private fun fetchArticles() {
         viewModelScope.launch(dispatcherProvider.main) {
-            getTopHeadlinesUseCase(AppConstants.COUNTRY)
+            getTopHeadlinesUseCase(countryName)
                 .catch { e ->
                     _topHeadlineUiState.value = UiState.Error(e.toString())
                 }
