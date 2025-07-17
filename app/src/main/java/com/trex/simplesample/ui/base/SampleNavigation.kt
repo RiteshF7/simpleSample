@@ -10,8 +10,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.trex.simplesample.ui.country.CountryListRoute
 import com.trex.simplesample.ui.home.HomeScreenRoute
-import com.trex.simplesample.ui.newssource.NewsSourceRoute
+import com.trex.simplesample.ui.language.LanguageListRoute
+import com.trex.simplesample.ui.news.NewsListRoute
+import com.trex.simplesample.ui.source.NewsSourceRoute
 import com.trex.simplesample.ui.topheadlines.TopHeadlineRoute
 import com.trex.simplesample.utils.AppConstants
 
@@ -63,7 +66,20 @@ fun SampleNavHost() {
         }
         composable(route = Route.NewsSources.name) {
             NewsSourceRoute(onNewsClick = {
-                openCustomChromeTab(context, it)
+                navController.navigate(route = Route.NewsList.passData(sourceId = it))
+            })
+        }
+
+        composable(route = Route.CountryList.name) {
+            CountryListRoute(onCountryClick = {
+                navController.navigate(route = Route.NewsList.passData(countryId = it))
+            })
+        }
+
+
+        composable(route = Route.LanguageList.name) {
+            LanguageListRoute(onLanguageClick = {
+                navController.navigate(route = Route.NewsList.passData(languageId = it))
             })
         }
 
@@ -90,10 +106,12 @@ fun SampleNavHost() {
             val countryId = it.arguments?.getString(AppConstants.COUNTRY_ID).toString()
             val languageId = it.arguments?.getString(AppConstants.LANGUAGE_ID).toString()
 
-//            NewsListRoute(onNewsClick = {
-//                openCustomChromeTab(context, it)
-//            }, sourceId = sourceId, countryId = countryId, languageId = languageId)
+            NewsListRoute(onNewsClick = {
+                openCustomChromeTab(context, it)
+            }, sourceId = sourceId, countryId = countryId, languageId = languageId)
         }
+
+
     }
 }
 

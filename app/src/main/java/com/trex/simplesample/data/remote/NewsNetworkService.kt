@@ -16,7 +16,17 @@ interface NewsNetworkService {
     ): TopHeadlinesDto
 
     @GET("top-headlines/sources")
-    suspend fun getNewsSources():NewsSourcesDto
+    suspend fun getNewsSources(): NewsSourcesDto
 
+    @GET("top-headlines")
+    suspend fun getNewsBySources(@Query("sources") sources: String): TopHeadlinesDto
 
+    @GET("top-headlines")
+    suspend fun getNewsByCountry(@Query("country") country: String): TopHeadlinesDto
+
+    @GET("top-headlines")
+    suspend fun getNewsByLanguage(@Query("language") language: String): TopHeadlinesDto
+
+    @GET("everything")
+    suspend fun getNewsByQueries(@Query("q") queries: String): TopHeadlinesDto
 }

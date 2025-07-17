@@ -1,4 +1,4 @@
-package com.trex.simplesample.ui.newssource
+package com.trex.simplesample.ui.source
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
