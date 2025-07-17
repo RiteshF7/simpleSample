@@ -15,6 +15,7 @@ import com.trex.simplesample.ui.home.HomeScreenRoute
 import com.trex.simplesample.ui.language.LanguageListRoute
 import com.trex.simplesample.ui.news.NewsListRoute
 import com.trex.simplesample.ui.source.NewsSourceRoute
+import com.trex.simplesample.ui.search.SearchScreenRoute
 import com.trex.simplesample.ui.topheadlines.TopHeadlineRoute
 import com.trex.simplesample.ui.topheadlines.topHeadlinesPaging.PaginationTopHeadlineRoute
 import com.trex.simplesample.utils.AppConstants
@@ -86,6 +87,12 @@ fun SampleNavHost() {
 
         composable(route = Route.PaginationTopHeadline.name) {
             PaginationTopHeadlineRoute(onNewsClick = {
+                openCustomChromeTab(context, it)
+            })
+        }
+
+        composable(route = Route.Search.name) {
+            SearchScreenRoute(onNewsClick = {
                 openCustomChromeTab(context, it)
             })
         }
