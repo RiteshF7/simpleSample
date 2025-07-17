@@ -1,5 +1,6 @@
 package com.trex.simplesample.data.remote.repositories
 
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -19,11 +20,10 @@ class TopHeadlinesPagingRepositoryImpl @Inject constructor(
     override fun getTopHeadlines(): Flow<PagingData<Article>> {
         return Pager(
             config = PagingConfig(
+                prefetchDistance = 2,
                 pageSize = AppConstants.PAGE_SIZE,
-                initialLoadSize = AppConstants.PAGE_SIZE,
-                prefetchDistance = 3,
-                enablePlaceholders = false,
-                maxSize = PagingConfig.MAX_SIZE_UNBOUNDED,
+                initialLoadSize = PAGE_SIZE,
+                enablePlaceholders = false
             ),
             pagingSourceFactory = { topHeadlinesPagingSourceFactory.create() }
         ).flow
