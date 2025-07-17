@@ -33,7 +33,7 @@ abstract class RepositoryModule {
     ): TopHeadlinesRepository
 
     @Binds
-    @Singleton
+    @ViewModelScoped
     abstract fun bindTopHeadlinesOfflineRepository(
         impl: TopHeadlinesOfflineRepositoryImpl
     ): TopHeadlinesOfflineRepository
