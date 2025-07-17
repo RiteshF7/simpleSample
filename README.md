@@ -134,23 +134,8 @@ implementation("androidx.hilt:hilt-work:1.1.0")
 kapt("androidx.hilt:hilt-compiler:1.1.0")
 ```
 
-### Testing
-```kotlin
-// Unit Testing
-testImplementation("junit:junit:4.13.2")
-testImplementation("org.mockito:mockito-core:5.3.1")
-testImplementation("androidx.arch.core:core-testing:2.2.0")
-testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-testImplementation("app.cash.turbine:turbine:0.12.1")
 
-// UI Testing
-androidTestImplementation("androidx.test.ext:junit:1.1.5")
-androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-androidTestImplementation("androidx.navigation:navigation-testing:2.6.0")
-```
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 com.trex.simplesample/
@@ -252,21 +237,7 @@ git merge HILT-ROOM-DB
 git merge HILT_NEWS_APP  # All features included
 ```
 
-## 🧪 Testing
-
-The repository includes comprehensive testing setup:
-
-- **Unit Tests** - Repository, ViewModel, and UseCase testing
-- **UI Tests** - Compose UI testing with Espresso
-- **Integration Tests** - Database and API integration testing
-
-Run tests:
-```bash
-./gradlew test           # Unit tests
-./gradlew connectedAndroidTest  # UI tests
-```
-
-## 📐 Architecture
+## Architecture
 
 The project follows **Clean Architecture** principles with **MVVM** pattern:
 
@@ -281,7 +252,7 @@ The project follows **Clean Architecture** principles with **MVVM** pattern:
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Here's how you can help:
 
@@ -290,17 +261,15 @@ We welcome contributions! Here's how you can help:
 1. **Fork** the repository
 2. **Create** a feature branch: `git checkout -b feature/your-feature-name`
 3. **Implement** your feature following the existing patterns
-4. **Add tests** for your feature
-5. **Update documentation** if needed
-6. **Submit** a pull request
+4. **Update documentation** if needed
+5. **Submit** a pull request
+
 
 ### Guidelines
 
 - Follow existing code style and architecture patterns
-- Write comprehensive tests for new features
 - Update README for new feature branches
 - Use meaningful commit messages
-- Ensure all tests pass before submitting PR
 
 ### Feature Branch Naming Convention
 
@@ -308,19 +277,19 @@ We welcome contributions! Here's how you can help:
 - `FEATURE-NAME-IMPROVEMENT` - For enhancements
 - `BUGFIX-DESCRIPTION` - For bug fixes
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Android Developers](https://developer.android.com/) for excellent documentation
 - [NewsAPI](https://newsapi.org/) for providing news data
 - Open source community for inspiration and contributions
 
-## 🚀 About Me
+## About Me
 
-Hi there! My name is **Ritesh Singh**, I work as a Software Developer and like to expand my skill set in my spare time.
+Hi there! My name is **Ritesh Singh**, I work as a Senior Android Developer and like to build things to make life a little bit less difficult for everyone.
 
 If you have any questions or want to connect, feel free to reach out to me on:
 
