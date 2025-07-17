@@ -24,7 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.trex.simplesample.R
 import com.trex.simplesample.domain.models.Article
-import com.trex.simplesample.ui.base.NewsList
+import com.trex.simplesample.ui.base.ArticleList
 import com.trex.simplesample.ui.base.ShowError
 import com.trex.simplesample.ui.base.ShowLoading
 import com.trex.simplesample.ui.base.UiState
@@ -82,7 +82,7 @@ fun SearchNewsList(
 ) {
     when (uiState) {
         is UiState.Success -> {
-            NewsList(uiState.data, onNewsClick)
+            ArticleList (uiState.data, onNewsClick)
         }
 
         is UiState.Loading -> {

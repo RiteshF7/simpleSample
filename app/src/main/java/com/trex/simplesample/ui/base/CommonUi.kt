@@ -1,7 +1,6 @@
 package com.trex.simplesample.ui.base
 
 
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,10 +14,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -41,45 +40,6 @@ import androidx.paging.compose.LazyPagingItems
 import coil.compose.AsyncImage
 import com.trex.simplesample.R
 import com.trex.simplesample.domain.models.Article
-import com.trex.simplesample.ui.topheadlines.ArticleList
-
-
-@Composable
-fun TitleText(title: String) {
-    Text(
-        text = title,
-        fontSize = 18.sp,
-        fontWeight = FontWeight.Bold
-    )
-}
-
-
-@Composable
-fun DescriptionText(description: String?) {
-    Text(
-        overflow = TextOverflow.Ellipsis,
-        text = description ?: "",
-        fontSize = 14.sp,
-        color = Color.DarkGray
-    )
-}
-
-@Composable
-fun ImageViewFromUrl(
-    imageUrl: String?,
-    modifier: Modifier = Modifier,
-) {
-
-    AsyncImage(
-        model = imageUrl,
-        contentDescription = "Image from URL",
-        contentScale = ContentScale.FillWidth,
-        modifier = modifier
-            .height(200.dp)
-            .fillMaxWidth()
-    )
-
-}
 
 
 @Composable
@@ -242,12 +202,6 @@ fun ArticleItem(
         Column(
             Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
-
-@Composable
-fun NewsList(articles: List<Article>, onNewsClick: (url: String) -> Unit) {
-    ArticleList(articles = articles, onNewsClick = onNewsClick)
-}
-
 
             Spacer(modifier = Modifier.height(8.dp))
             TitleText(article.title)
