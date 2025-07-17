@@ -7,7 +7,7 @@ data class ApiArticle(
     @SerializedName("title") val title: String = "",
     @SerializedName("description") val description: String?,
     @SerializedName("url") val url: String = "",
-    @SerializedName("urlToImage") val imageUrl: String = "",
+    @SerializedName("urlToImage") val imageUrl: String? = "",
     @SerializedName("source") val apiSource: ApiSource
 )
 
@@ -24,7 +24,7 @@ fun ApiArticle.toDomain(country: String): Article = Article(
     title = this.title,
     description = this.description,
     url = this.url,
-    imageUrl = this.imageUrl,
+    imageUrl = this.imageUrl?:"",
     sourceName = this.apiSource.name,
     country = country
 )
