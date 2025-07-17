@@ -13,6 +13,8 @@ import com.trex.simplesample.domain.repositories.NewsRepository
 import com.trex.simplesample.domain.repositories.NewsSourceRepository
 import com.trex.simplesample.domain.repositories.SearchRepository
 import com.trex.simplesample.domain.repositories.TopHeadlinesPagingRepository
+import com.trex.simplesample.data.remote.repositories.topheadlinesoffline.TopHeadlinesOfflineRepositoryImpl
+import com.trex.simplesample.domain.repositories.TopHeadlinesOfflineRepository
 import com.trex.simplesample.domain.repositories.TopHeadlinesRepository
 import dagger.Binds
 import dagger.Module
@@ -29,6 +31,12 @@ abstract class RepositoryModule {
     abstract fun bindTopHeadlinesRepository(
         impl: TopHeadlinesRepositoryImpl
     ): TopHeadlinesRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindTopHeadlinesOfflineRepository(
+        impl: TopHeadlinesOfflineRepositoryImpl
+    ): TopHeadlinesOfflineRepository
 
 
     @Binds

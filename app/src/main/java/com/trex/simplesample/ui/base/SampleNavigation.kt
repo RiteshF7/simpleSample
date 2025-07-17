@@ -18,6 +18,7 @@ import com.trex.simplesample.ui.source.NewsSourceRoute
 import com.trex.simplesample.ui.search.SearchScreenRoute
 import com.trex.simplesample.ui.topheadlines.TopHeadlineRoute
 import com.trex.simplesample.ui.topheadlines.topHeadlinesPaging.PaginationTopHeadlineRoute
+import com.trex.simplesample.ui.topheadlines.topHeadlinesoffline.TopHeadlinesOfflineScreenRoute
 import com.trex.simplesample.utils.AppConstants
 
 sealed class Route(val name: String) {
@@ -93,6 +94,12 @@ fun SampleNavHost() {
 
         composable(route = Route.Search.name) {
             SearchScreenRoute(onNewsClick = {
+                openCustomChromeTab(context, it)
+            })
+        }
+
+        composable(route = Route.OfflineTopHeadline.name) {
+            TopHeadlinesOfflineScreenRoute(onNewsClick = {
                 openCustomChromeTab(context, it)
             })
         }
