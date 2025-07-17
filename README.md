@@ -1,7 +1,7 @@
 # SimpleSample - Android Boilerplate Repository
 
 <p align="center">
-<img alt="Android Boilerplate Banner" src="https://via.placeholder.com/800x300/1565C0/FFFFFF?text=SimpleSample+Android+Boilerplate"> 
+<img alt="Android Boilerplate Banner" src="https://raw.githubusercontent.com/RiteshF7/simpleSample/refs/heads/main/androidboilerplatebanner.png"> 
 </p>
 
 ## 🚀 Overview
