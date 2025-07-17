@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trex.simplesample.data.remote.repositories.LanguageListRepositoryImpl
 import com.trex.simplesample.domain.models.Language
+import com.trex.simplesample.domain.repositories.LanguageRepository
 import com.trex.simplesample.ui.base.UiState
 import com.trex.simplesample.utils.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LanguageListViewModel @Inject constructor(
-    private val languageListRepository: LanguageListRepositoryImpl,
+    private val languageListRepository: LanguageRepository,
     private val dispatcherProvider: DispatcherProvider,
 ) : ViewModel() {
 

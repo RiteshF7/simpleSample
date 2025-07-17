@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trex.simplesample.data.remote.repositories.CountryListRepositoryImpl
 import com.trex.simplesample.domain.models.CountryDto
+import com.trex.simplesample.domain.repositories.CountryRepository
 import com.trex.simplesample.ui.base.UiState
 import com.trex.simplesample.utils.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CountryListViewModel @Inject constructor(
-    private val countryListRepository: CountryListRepositoryImpl,
+    private val countryListRepository: CountryRepository,
     private val dispatcherProvider: DispatcherProvider,
 ) : ViewModel() {
 

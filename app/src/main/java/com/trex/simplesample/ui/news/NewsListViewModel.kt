@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.trex.simplesample.data.remote.repositories.NewsRepositoryImpl
 import com.trex.simplesample.domain.models.Article
+import com.trex.simplesample.domain.repositories.NewsRepository
 import com.trex.simplesample.ui.base.UiState
 import com.trex.simplesample.utils.DispatcherProvider
 import com.trex.simplesample.utils.NetworkHelper
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsListViewModel @Inject constructor(
-    private val newsRepository: NewsRepositoryImpl,
+    private val newsRepository: NewsRepository,
     private val logger: Logger,
     private val dispatcherProvider: DispatcherProvider,
     private val networkHelper: NetworkHelper,
