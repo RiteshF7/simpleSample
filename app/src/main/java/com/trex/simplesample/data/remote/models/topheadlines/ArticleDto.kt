@@ -11,7 +11,7 @@ data class ApiArticle(
     @SerializedName("source") val apiSource: ApiSource
 )
 
-fun List<ApiArticle>.apiArticleListToDomain(country: String): List<Article> {
+fun List<ApiArticle>.apiArticleListToDomain(country: String=""): List<Article> {
     val list = mutableListOf<Article>()
     forEach { apiArticle ->
         list.add(apiArticle.toDomain(country))
@@ -20,14 +20,16 @@ fun List<ApiArticle>.apiArticleListToDomain(country: String): List<Article> {
 }
 
 
-fun ApiArticle.toDomain(country: String): Article = Article(
+fun ApiArticle.toDomain(country: String=""): Article = Article(
     title = this.title,
     description = this.description,
     url = this.url,
-    imageUrl = this.imageUrl,
+    imageUrl = this.imageUrl?:"",
     sourceName = this.apiSource.name,
     country = country
 )
+
+
 
 
 
