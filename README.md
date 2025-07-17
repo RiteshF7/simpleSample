@@ -4,17 +4,17 @@
 <img alt="Android Boilerplate Banner" src="https://raw.githubusercontent.com/RiteshF7/simpleSample/refs/heads/main/androidboilerplatebanner.png"> 
 </p>
 
-## 🚀 Overview
+## Overview
 
 SimpleSample is a comprehensive Android boilerplate repository designed to eliminate the repetitive setup process when starting new Android projects. Instead of writing the same boilerplate code repeatedly, developers can simply merge feature branches to quickly add commonly used functionalities like dependency injection, networking, database integration, and more.
 
-## 💡 Problem & Solution
+## Problem & Solution
 
 **Problem:** Starting a new Android project requires writing extensive boilerplate code for features like Hilt, Retrofit, Room Database, Navigation, etc., which is time-consuming and repetitive.
 
 **Solution:** SimpleSample provides a modular branch-based approach where each feature is maintained in separate branches. Developers can start with a clean base and merge only the features they need, creating a customized project setup in minutes.
 
-## 🌟 Available Feature Branches
+## Available Feature Branches
 
 ### Core Setup
 - **`initial_clean_setup`** - Clean Android project with basic folder structure
@@ -38,7 +38,7 @@ SimpleSample is a comprehensive Android boilerplate repository designed to elimi
 - **`HILT_NEWS_APP`** - Complete news app with all features merged
 - **`master`** - Stable release with all branches merged
 
-## 📱 Sample Implementation: News App
+## Sample Implementation: News App
 
 The repository includes a complete News App implementation showcasing all features:
 
@@ -324,13 +324,13 @@ Hi there! My name is **Ritesh Singh**, I work as a Software Developer and like t
 
 If you have any questions or want to connect, feel free to reach out to me on:
 
-- [LinkedIn](https://www.linkedin.com/in/riteshsingh/)
-- [GitHub](https://github.com/riteshsingh)
+- [LinkedIn](https://www.linkedin.com/in/sholot163/)
+- [GitHub](https://github.com/riteshf7)
 
 ---
 
 <p align="center">
-Made with ❤️ by <a href="https://github.com/riteshsingh">Ritesh Singh</a>
+Made with ❤️ by <a href="https://github.com/riteshf7">Ritesh Singh</a>
 </p>
 
 <p align="center">
