@@ -1,46 +1,83 @@
 package com.trex.simplesample.ui.base
 
+
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import coil.compose.AsyncImage
 import com.trex.simplesample.R
 import com.trex.simplesample.domain.models.Article
+
+
+@Composable
+fun TitleText(title: String) {
+    Text(
+        text = title,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold
+    )
+}
+
+
+@Composable
+fun DescriptionText(description: String?) {
+    Text(
+        overflow = TextOverflow.Ellipsis,
+        text = description ?: "",
+        fontSize = 14.sp,
+        color = Color.DarkGray
+    )
+}
+
+@Composable
+fun ImageViewFromUrl(
+    imageUrl: String?,
+    modifier: Modifier = Modifier,
+) {
+
+    AsyncImage(
+        model = imageUrl,
+        contentDescription = "Image from URL",
+        contentScale = ContentScale.FillWidth,
+        modifier = modifier
+            .height(200.dp)
+            .fillMaxWidth()
+    )
+
+}
 
 @Composable
 fun ShowLoading() {
@@ -110,115 +147,72 @@ fun ShowError(text: String, retryClicked: () -> Unit = {}) {
 }
 
 @Composable
-fun ArticleList(articles: List<Article>, onNewsClick: (url: String) -> Unit) {
-    LazyColumn {
-        items(articles.size) { index ->
-            Article(article = articles[index], onNewsClick = onNewsClick)
-        }
-    }
-}
+fun PagedArticleList(pagedArticles: LazyPagingItems<Article>, onNewsClick: (url: String) -> Unit) {
 
-@Composable
-fun Article(article: Article, onNewsClick: (url: String) -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable {
-                if (article.url.isNotEmpty()) {
-                    onNewsClick(article.url)
-                }
-            }) {
-        NewsCard(
-            imageUrl = article.imageUrl,
-            title = article.title,
-            description = article.description,
-            sourceName = article.sourceName,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
+    Column(Modifier.fillMaxWidth()) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(28.dp),
+            contentPadding = PaddingValues(16.dp)
+        ) {
+            items(pagedArticles.itemCount) { articleIndex ->
+                val article = pagedArticles[articleIndex]
+                if (article != null) ArticleItem(article, onNewsClick)
+            }
 
-}
+            item {
+                when {
+                    pagedArticles.loadState.append is LoadState.Loading -> {
+                        ShowLoading()
+                    }
 
-@Composable
-fun NewsCard(
-    imageUrl: String?,
-    title: String,
-    description: String?,
-    sourceName: String,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(12.dp),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        )
-    ) {
-        Column {
-            AsyncImage(
-                model = imageUrl,
-                contentDescription = stringResource(R.string.banner_image),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
-            )
+                    pagedArticles.loadState.append is LoadState.Error -> {
+                        ShowError("Something went wrong. Please try again.")
+                    }
 
-            Column(
-                modifier = Modifier.padding(16.dp)
-            ) {
-                if (title.isNotEmpty()) {
-                    Text(
-                        text = title,
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                }
-
-                if (!description.isNullOrEmpty()) {
-                    Text(
-                        text = description,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 3,
-                        overflow = TextOverflow.Ellipsis,
-                        lineHeight = 18.sp,
-                        modifier = Modifier.padding(bottom = 12.dp)
-                    )
-                }
-
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    thickness = 1.dp,
-                    color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
-                )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.AccountCircle,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(16.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = sourceName,
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
                 }
             }
         }
     }
+
 }
+
+@Composable
+fun ArticleList(articles: List<Article>, onNewsClick: (url: String) -> Unit) {
+    LazyColumn {
+        items(articles.size) { index ->
+            ArticleItem(article = articles[index], onNewsClick = onNewsClick)
+        }
+    }
+}
+
+@Composable
+fun ArticleItem(
+    article: Article,
+    onNewsClick: (url: String) -> Unit = {}
+) {
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.White)
+            .clickable { onNewsClick(article.url) }
+    ) {
+        ImageViewFromUrl(article.imageUrl)
+        Column(
+            Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+        ) {
+
+
+            Spacer(modifier = Modifier.height(8.dp))
+            TitleText(article.title)
+
+            Spacer(modifier = Modifier.height(4.dp))
+            DescriptionText(article.description)
+        }
+    }
+
+}
+
+
+
