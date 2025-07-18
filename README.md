@@ -304,7 +304,9 @@ Hi there! My name is **Ritesh Singh**, I work as a Senior Android Developer and 
 
 If you have any questions or want to connect, feel free to reach out to me on:
 
-- [LinkedIn](https://www.linkedin.com/in/sholot163/)
+- ## Connect with Me
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&style=for-the-badge)](https://www.linkedin.com/in/riteshf1/)
 - [GitHub](https://github.com/riteshf7)
 
 ---
