@@ -307,6 +307,9 @@ If you have any questions or want to connect, feel free to reach out to me on:
 - ## Connect with Me
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&style=for-the-badge)](https://www.linkedin.com/in/riteshf1/)
+## Connect with Me
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&style=for-the-badge)](https://www.linkedin.com/in/riteshf7/)
 - [GitHub](https://github.com/riteshf7)
 
 ---
