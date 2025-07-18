@@ -37,7 +37,7 @@ class TopHeadlinesPagingSource @Inject constructor(
             val response = networkService.getTopHeadlines(
                 country = country,
                 page = page,
-                pageSize = AppConstants.PAGE_SIZE // Use fixed PAGE_SIZE for consistency
+                pageSize = AppConstants.PAGE_SIZE
             )
             val articleList = response.apiArticles?.apiArticleListToDomain(country) ?: emptyList()
 

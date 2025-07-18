@@ -7,10 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.trex.simplesample.domain.models.Article
-import com.trex.simplesample.ui.base.ShowError
-import com.trex.simplesample.ui.base.ShowLoading
-import com.trex.simplesample.ui.topheadlines.ArticleItem
 import com.trex.simplesample.ui.base.PagedArticleList
 
 @Composable
