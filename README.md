@@ -16,6 +16,11 @@ SimpleSample is a comprehensive Android boilerplate repository designed to elimi
 
 ## Available Feature Branches
 
+<p align="center">
+<img alt="Android Boilerplate Banner" src="https://raw.githubusercontent.com/RiteshF7/simpleSample/refs/heads/main/androidboilerplatebanner.png"> 
+</p>
+
+
 ### Core Setup
 - **`initial_clean_setup`** - Clean Android project with basic folder structure
 - **`HILT`** - Dagger Hilt dependency injection setup
