@@ -17,7 +17,7 @@ SimpleSample is a comprehensive Android boilerplate repository designed to elimi
 ## Available Feature Branches
 
 <p align="center">
-<img alt="Android Boilerplate Banner" src="https://raw.githubusercontent.com/RiteshF7/simpleSample/refs/heads/main/androidboilerplatebanner.png"> 
+<img alt="Android Boilerplate Banner" src="https://raw.githubusercontent.com/RiteshF7/simpleSample/refs/heads/main/simple_roadmap.png"> 
 </p>
 
 
@@ -46,6 +46,12 @@ SimpleSample is a comprehensive Android boilerplate repository designed to elimi
 ## Sample Implementation: News App
 
 The repository includes a complete News App implementation showcasing all features:
+
+<p align="center">
+<img alt="Android Boilerplate Banner" src="https://raw.githubusercontent.com/RiteshF7/simpleSample/refs/heads/main/roadmap_news_app.png"> 
+</p>
+
+
 
 ### Major Highlights
 
