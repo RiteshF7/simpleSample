@@ -203,7 +203,7 @@ git merge HILT_NEWS_APP
 
 ### 4. Configure API
 1. Get your API key from [NewsAPI](https://newsapi.org/)
-2. Add to your `local.properties`:
+2. Add to your `/utils/AppConstants`:
 ```properties
 API_KEY="your_api_key_here"
 ```
